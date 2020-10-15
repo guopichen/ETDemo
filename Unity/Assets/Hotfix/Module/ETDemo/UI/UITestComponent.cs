@@ -30,6 +30,7 @@ namespace ETHotfix
 		public void OnTest()
 		{
 			Log.Debug("OnTest");
+			ETDemo.MapHelper.EnterMapAsync(2,2).Coroutine();
 		}
 	}
 }

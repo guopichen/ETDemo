@@ -25,6 +25,7 @@ namespace ETModel
 				Game.EventSystem.Add(DLLType.Model, typeof(Init).Assembly);
 
 				Game.Scene.AddComponent<ResourcesComponent>();
+				Game.Scene.AddComponent<UnitComponent>();
 
 				// 下载ab包
 				await BundleHelper.DownloadBundle();
