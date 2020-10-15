@@ -52,7 +52,7 @@ namespace ETHotfix
                     GameObject gameObjectGrid = UnityEngine.Object.Instantiate(bundleGameObjectMapGrid);
                     gameObjectGrid.name = string.Format("Grid[{0}][{1}]", x, y);
                     // 创建地图格子实体
-                    int id = x * 1000 + y;
+                    int id = gameObjectGrid.GetHashCode();// x * 1000 + y;
                     Log.Debug("创建地图格子实体:{0} ", id);
                     mapGridUnit = ETModel.ComponentFactory.CreateWithId<ETModel.Unit, GameObject>(
                         id, gameObjectGrid);

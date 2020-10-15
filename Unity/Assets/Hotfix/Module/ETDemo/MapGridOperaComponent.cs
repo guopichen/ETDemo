@@ -30,30 +30,23 @@ namespace ETHotfix
             }
         }
 
+
         //// 根据鼠标点获取到选中的地图格子
         Unit GetMapGrid()
         {
             UnitComponent unitComponent = ETModel.Game.Scene.GetComponent<UnitComponent>();
-            return unitComponent.Get(1);
+            Collider2D[] cols = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+            Log.Debug("cols count: "+ cols.Length);
+            foreach (var col in cols)
+            {
+                //Log.Debug("mousePosition:{0}, grid:{1}",
+                //    Input.mousePosition,
+                //    col.transform.parent.name);
+                ////
+                return unitComponent.Get(col.gameObject.GetHashCode());
+            }
+            return null;
         }
-
-        ////// 根据鼠标点获取到选中的地图格子
-        //Unit GetMapGrid()
-        //{
-        //    UnitComponent unitComponent = ETModel.Game.Scene.GetComponent<UnitComponent>();
-        //    Collider2D[] cols = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        //    foreach (var col in cols)
-        //    {
-        //        // TODO: 为什么总是选中第一个格子??
-        //        Log.Debug("mousePosition:{0}, grid:{1},girdName: {2}",
-        //            Input.mousePosition,
-        //            col.transform.parent.GetHashCode(),
-        //            col.transform.parent.name);
-        //        //
-        //        return unitComponent.Get(col.transform.parent.GetHashCode());
-        //    }
-        //    return null;
-        //}
     }
 }
 
