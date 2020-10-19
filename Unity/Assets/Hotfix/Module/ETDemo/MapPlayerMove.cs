@@ -15,10 +15,11 @@ namespace ETHotfix
             UnitComponent unitComponent = ETModel.Game.Scene.GetComponent<UnitComponent>();
             Unit playerUnit = unitComponent.Get(99);
             MoveComponent moveComponent = playerUnit.GetComponent<MoveComponent>();
-            Log.Debug("玩家移动!!!!!!");
             // move
             CancellationTokenSource CancellationTokenSource = new CancellationTokenSource();
-            moveComponent.MoveToAsync(target, 10.0f, CancellationTokenSource.Token);
+            moveComponent.MoveToAsync(new Vector3(target.x,target.y, playerUnit.Position.z), 10.0f, CancellationTokenSource.Token);
+            Log.Debug("玩家移动到目标: " + target);
+
         }
     }
 

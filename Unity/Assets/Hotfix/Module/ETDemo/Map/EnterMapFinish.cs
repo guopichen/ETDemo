@@ -20,20 +20,22 @@ namespace ETHotfix
             Unit mapGridUnit = CreateMap(resourcesComponent,abName,unitComponent,MapSizeX,MapSizeY);
 
             // 玩家
-            Unit playerUnit = CreatePlayer(resourcesComponent, abName, unitComponent);
-            playerUnit.Position = mapGridUnit.Position;
+            CreatePlayer(resourcesComponent, abName, unitComponent,mapGridUnit.Position);
 
         }
 
-        Unit CreatePlayer(ResourcesComponent resourcesComponent, string abName, UnitComponent unitComponent)
+        void CreatePlayer(ResourcesComponent resourcesComponent, string abName,
+            UnitComponent unitComponent, Vector3 target)
         {
             GameObject gameObjectPlayer = UnityEngine.Object.Instantiate(
                 (GameObject)resourcesComponent.GetAsset(abName.StringToAB(), "MapPlayer"));
             // 创建玩家实体
             Unit playerUnit = ETModel.ComponentFactory.CreateWithId<ETModel.Unit, GameObject>(99,gameObjectPlayer);
             unitComponent.Add(playerUnit);
-            playerUnit.AddComponent<MoveComponent>();
-            return playerUnit;
+            MoveComponent moveComponent = playerUnit.AddComponent<MoveComponent>();
+            playerUnit.Position = new Vector3(target.x, target.y, -2.0f);
+            moveComponent.Target = playerUnit.Position;
+
         }
 
         Unit CreateMap(ResourcesComponent resourcesComponent, string abName, UnitComponent unitComponent,
